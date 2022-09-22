@@ -11,9 +11,17 @@ class automation:
     url = "https://testautomationpractice.blogspot.com/"
 
     def open_webpage(self):
-
+        """ This method is to open the webpage """
         self.driver.get(self.url)
         time.sleep(3)
+
+        """ Assertion of the title using try method """
+        try:
+            title_check = self.driver.title
+            assert "Automation Testing Practice" in title_check
+            print(" Assertion pass - Title matched ")
+        except Exception as e:
+            print("Assertion failed",format(e))
 
 
     # 
@@ -42,9 +50,15 @@ class automation:
         click_me = self.driver.find_element(by=By.XPATH,value="//button[@onclick='myFunction()']")
         click_me.click()
 
-        time.sleep(2)
+        time.sleep(1)
 
-        self.driver.switch_to.alert.accept()
+        """ Capturing the alert message & printing it and accepting the alert """
+        alert = self.driver.switch_to.alert
+        alert_text = alert.text
+        print("The alert message is : ",alert_text)
+        alert.accept()
+
+        #self.driver.switch_to.alert.accept()
 
         """ Checking the alert is accepted or not 
         for this we used page_source.find
@@ -95,7 +109,6 @@ class automation:
                 break
 
 
-
     def select_menu(self):
         """ This method is to perform all the dropdown/select operations 
         based on select_by_visible_text ; select_by_index etc """
@@ -126,7 +139,6 @@ class automation:
         drop_down_4 = Select(select_animal)
         drop_down_4.select_by_value("avatar")
         time.sleep(1)
-
 
 
     def sign_up_page(self):
@@ -205,7 +217,6 @@ class automation:
         time.sleep(2)
 
 
-
     def double_click(self):
         """ This method is to perform double click operation 
         on the button so that the """
@@ -222,7 +233,6 @@ class automation:
         time.sleep(2)
 
         self.close_webpage()
-
 
 
     def drag_drop(self):
@@ -243,7 +253,6 @@ class automation:
         time.sleep(2)
 
         self.close_webpage()
-
 
 
     def drag_drop_image(self):
@@ -269,7 +278,6 @@ class automation:
         print(" Mr.John is moved to trash .... ")
 
         self.close_webpage()
-
 
 
     def slider(self):
@@ -344,7 +352,6 @@ class automation:
         self.close_webpage()
 
 
-
     def tool_tip(self):
         """ Performed mouse hover on the webelement for tooltip action """
 
@@ -381,7 +388,6 @@ class automation:
         action.drag_and_drop_by_offset(draggable,1100,250).perform()
 
     
-
     def text_label(self):
 
         self.open_webpage()
@@ -389,7 +395,6 @@ class automation:
         label_text = self.driver.find_element(by=By.ID,value="Text1").text
 
         print(label_text)
-
 
 
     def text_print_full_page(self):
@@ -404,7 +409,6 @@ class automation:
         self.close_webpage()
 
 
-
     def close_webpage(self):
         """ close the webdriver/window """
 
@@ -414,4 +418,4 @@ class automation:
 
 s = automation()
 
-s.slider()
+s.alert_handle()
