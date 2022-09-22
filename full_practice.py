@@ -63,10 +63,8 @@ class automation:
         for this we used page_source.find
         i.e 'You Pressed OK!' text is present after the alert accepted """
         if self.driver.page_source.find("You pressed OK!"):
-            
             print(" Alert Accepted ...! ")
         else:
-
             print("Alert not accepted")
 
         self.close_webpage()
