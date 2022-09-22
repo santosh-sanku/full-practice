@@ -26,7 +26,7 @@ class automation:
 
     # 
     def window_handle(self):
-
+        """ In this methos we have done the windows/tab handling """
         self.open_webpage()
 
         wiki_search = self.driver.find_element(by=By.ID,value="Wikipedia1_wikipedia-search-input")
@@ -71,6 +71,7 @@ class automation:
 
         self.close_webpage()
 
+
     #
     def date_picker(self):
 
@@ -96,8 +97,6 @@ class automation:
         # while month.text != "September" and year.text != "2023":
         #     next_button.click()
         #     break
-        
-
 
         for date in date_list:
             data = date.text
@@ -218,7 +217,6 @@ class automation:
     def double_click(self):
         """ This method is to perform double click operation 
         on the button so that the """
-
         self.open_webpage()
 
         action = ActionChains(self.driver)
@@ -229,12 +227,11 @@ class automation:
         action.double_click(copy_button).perform()
 
         time.sleep(2)
-
         self.close_webpage()
 
 
     def drag_drop(self):
-        
+        """ This method is to drag and drop an object from source to destination """
         self.open_webpage()
 
         action = ActionChains(self.driver)
@@ -249,13 +246,11 @@ class automation:
         action.drag_and_drop(source_1,target_1).perform()
 
         time.sleep(2)
-
         self.close_webpage()
 
 
     def drag_drop_image(self):
         """ here image is dragged and dropped from source to destination """
-
         self.open_webpage()
 
         action = ActionChains(self.driver)
@@ -267,20 +262,17 @@ class automation:
         self.driver.execute_script("arguments[0].scrollIntoView();",source_2)
         time.sleep(2)
 
+        """ Here we perform drag & drop using source and destinations weblocators in the dran and drop method """
         action.drag_and_drop(source_2,target_2).perform()
 
-        # action.click_and_hold(source_2).move_to_element(target_2).pause(2).move_by_offset(1165,148).release().perform()
-
-        time.sleep(2)
-
         print(" Mr.John is moved to trash .... ")
-
+        # action.click_and_hold(source_2).move_to_element(target_2).pause(2).move_by_offset(1165,148).release().perform()
+        time.sleep(2)
         self.close_webpage()
 
 
     def slider(self):
         """ Here slide operation is performed on the slider """
-
         self.open_webpage()
 
         action = ActionChains(self.driver)
@@ -306,32 +298,31 @@ class automation:
         """ Taking screenshot after the sliding operation """
         self.driver.save_screenshot('Screenshot_after_'+ str(random.randint(0,100)) +'.png')
 
+        """ Below line is to get the X & Y co-ordinates of the element """
+        # point = slider_bar.location
+        # print(point)
         self.close_webpage()
+
 
     #    
     def table_access(self):
         """ HTML Table operations like
         no. of rows, no. of columns, printing the entire data from the table
         """
-
         self.open_webpage()
 
         html_table = self.driver.find_element(by=By.XPATH,value="//h2[normalize-space()='HTML Table']")
-
         html_table.location_once_scrolled_into_view
 
         time.sleep(2)
 
         row_num = len(self.driver.find_elements(by=By.XPATH,value='//*[@id="HTML1"]/div[1]/table/tbody/tr'))
-
         col_num = len(self.driver.find_elements(by=By.XPATH,value="//table[@name='BookTable']//tr[2]//td"))
 
         print("Number of ROWS in the table are : ",row_num)
-
         print("Number of COLOUMNS in the table are : ",col_num)
 
         time.sleep(2)
-        
 
         """ To print the entire data from the table """
         before_xpath = "//table[@name='BookTable']//tbody//tr["
@@ -351,7 +342,6 @@ class automation:
 
     def tool_tip(self):
         """ Performed mouse hover on the webelement for tooltip action """
-
         self.open_webpage()
 
         action = ActionChains(self.driver)
@@ -363,51 +353,50 @@ class automation:
         action.move_to_element(hover).perform()
         # hover.click()
         time.sleep(2)
-
         self.close_webpage()
 
-   
-    #
-    def resizable(self):
 
+    def resizable(self):
+        """ In this method, performed the drag and drop using X & Y coord
+        to drag the resizable object """
         self.open_webpage()
 
         action = ActionChains(self.driver)
 
         heading = self.driver.find_element(by=By.XPATH,value="//h2[normalize-space()='Resizable']")
-
         heading.location_once_scrolled_into_view
 
         time.sleep(1)
 
+        """ Here the resizable operation is done using drag & drop method """
         draggable = self.driver.find_element(by=By.XPATH,value="//div[@class='ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se']")
+        action.drag_and_drop_by_offset(draggable,100,100).perform()
 
-        action.drag_and_drop_by_offset(draggable,1100,250).perform()
+        time.sleep(3)
+        self.close_webpage()
 
-    
+
     def text_label(self):
-
+        """ This method is to get the text from the text_lable and print it on the console """
         self.open_webpage()
 
         label_text = self.driver.find_element(by=By.ID,value="Text1").text
-
         print(label_text)
 
 
     def text_print_full_page(self):
         """ In this method we will print the entier text from the webpage """
-
         self.open_webpage()
 
         full_page = self.driver.find_element(by=By.TAG_NAME,value="body").text
-
         print(full_page)
 
         self.close_webpage()
 
     
     def css_properties(self):
-
+        """ This method is to get the CSS properties of a web element
+        For reference we have taken color property """
         self.open_webpage()
         time.sleep(1)
 
@@ -430,10 +419,8 @@ class automation:
 
     def close_webpage(self):
         """ close the webdriver/window """
-
         self.driver.close()
 
 
 s = automation()
-
-s.css_properties()
+s.resizable()
