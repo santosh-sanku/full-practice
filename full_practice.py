@@ -39,7 +39,6 @@ class automation:
         first_link.click()
 
 
-
     def alert_handle(self):
         """ In this method we handle alert 
         here the alert operation is ACCEPTED
@@ -71,7 +70,6 @@ class automation:
             print("Alert not accepted")
 
         self.close_webpage()
-
 
     #
     def date_picker(self):
@@ -310,7 +308,6 @@ class automation:
 
         self.close_webpage()
 
-
     #    
     def table_access(self):
         """ HTML Table operations like
@@ -369,7 +366,7 @@ class automation:
 
         self.close_webpage()
 
-    
+   
     #
     def resizable(self):
 
@@ -408,6 +405,28 @@ class automation:
 
         self.close_webpage()
 
+    
+    def css_properties(self):
+
+        self.open_webpage()
+        time.sleep(1)
+
+        scroll_down = self.driver.find_element(by=By.XPATH,value="//h2[normalize-space()='XPath Axes']")
+        scroll_down.location_once_scrolled_into_view
+
+        time.sleep(1)
+
+        e_id = self.driver.find_element(by=By.XPATH,value="//name[normalize-space()='David']")
+        e_des = self.driver.find_element(by=By.XPATH,value="//designation[@discipline='web']")
+
+        name_color = e_id.value_of_css_property('color')
+        des_color = e_des.value_of_css_property('color')
+
+        print(name_color)
+        print(des_color)
+
+        self.close_webpage()
+
 
     def close_webpage(self):
         """ close the webdriver/window """
@@ -415,7 +434,6 @@ class automation:
         self.driver.close()
 
 
-
 s = automation()
 
-s.alert_handle()
+s.css_properties()
