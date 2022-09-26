@@ -24,7 +24,6 @@ class automation:
             print("Assertion failed",format(e))
 
 
-    # 
     def window_handle(self):
         """ In this methos we have done the windows/tab handling """
         self.open_webpage()
@@ -35,8 +34,20 @@ class automation:
         search_button = self.driver.find_element(by=By.XPATH,value="//input[@type='submit']")
         search_button.click()
 
-        first_link = self.driver.find_element(by=By.XPATH,value="//div[@id='sidebar-left-1']//div[@id='Wikipedia1']//div[@id='Wikipedia1_wikipedia-search-results']//div[1]//a")
+        parent_handle = self.driver.current_window_handle
+        print("Parent window handle is : ",parent_handle)
+
+        time.sleep(2)
+
+        first_link = self.driver.find_element(by=By.XPATH,value="//div[@id='Wikipedia1_wikipedia-search-results']//div[@id='wikipedia-search-result-link'][5]")
         first_link.click()
+
+        time.sleep(3)
+
+        self.driver.switch_to.window(parent_handle)
+
+        window_handles = self.driver.window_handles
+        print("List of avalible window handles are : ",window_handles)
 
 
     def alert_handle(self):
@@ -421,4 +432,4 @@ class automation:
 
 
 s = automation()
-s.resizable()
+s.window_handle()
